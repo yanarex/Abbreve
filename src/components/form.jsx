@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LoadingSpinner } from "./loadingSpinner";
 import copyImage from "../assets/copy.png";
+
 const searchParams = new URLSearchParams(window.location.search);
 const prefillVar = searchParams.get("share");
 
@@ -61,6 +62,15 @@ const Form = () => {
           setIsLoading(false);
         });
     }
+  };
+
+  const clearForm = () => {
+    setUserInput("");
+    setData(null);
+    setError(false);
+    setErrorMessage(false);
+    setIsUserInputBlank(true);
+    setIsLoading(false);
   };
 
   const copyToClipboard = (e) => {
@@ -144,6 +154,11 @@ const Form = () => {
               disabled={isLoading || !hasUserInputChanged}
               className="bg-deeppurple text-ash font-bold rounded-xl hover:scale-110 p-2 mt-4 md:mt-0 items-center flex justify-center h-[50px] min-w-[100px] w-full transition-all cursor-pointer md:w-auto">
               {isLoading ? <LoadingSpinner /> : "Search"}
+            </button>
+            <button
+              onClick={clearForm}
+              className="bg-deeppurple text-ash font-bold rounded-xl hover:scale-110 p-2 mt-4 md:mt-0 items-center flex justify-center h-[50px] min-w-[100px] w-full md:w-auto">
+              Clear
             </button>
           </form>
 
